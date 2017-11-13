@@ -4,16 +4,26 @@
 *
 */
 
-import React from 'react';
+import React, { PropTypes } from 'react';
 
 
 import styles from './styles.css';
 
-function Navigation() {
+function Navigation({ topics }) {
   return (
     <div className={styles.navigation}>
+      We have {topics.length} topics in the nav component
     </div>
   );
 }
+
+Navigation.propTypes = {
+  topics: PropTypes.arrayOf(
+    PropTypes.shape({
+      name: PropTypes.string.isRequired,
+      description: PropTypes.string.isRequired,
+    }),
+  ).isRequired,
+};
 
 export default Navigation;
