@@ -7,6 +7,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import NavigationContainer from '../../containers/NavigationContainer';
+import LinkListContainer from '../../containers/LinkListContainer';
 
 // eslint-disable-next-line react/prefer-stateless-function
 export class HomePage extends React.Component {
@@ -14,6 +15,7 @@ export class HomePage extends React.Component {
     return (
       <div>
         <NavigationContainer />
+        <LinkListContainer />
       </div>
     );
   }
