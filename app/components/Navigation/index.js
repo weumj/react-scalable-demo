@@ -6,7 +6,6 @@
 
 import React, { PropTypes } from 'react';
 
-
 import styles from './styles.css';
 
 function Navigation({ topics }) {

@@ -4,14 +4,27 @@
  *
  */
 
-import React from 'react';
+import React, { PropTypes, Component } from 'react';
 import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
 import selectNavigationContainer from './selectors';
+import { requestTopics } from './actions';
 
-export class NavigationContainer extends React.Component { // eslint-disable-line react/prefer-stateless-function
+import Navigation from '../../components/Navigation';
+
+export class NavigationContainer extends Component { // eslint-disable-line react/prefer-stateless-function
+  static propTypes = {
+    requestTopics: PropTypes.func.isRequired,
+  };
+
+  componentWillMount() {
+    this.props.requestTopics();
+  }
+
   render() {
     return (
       <div>
+        <Navigation {...this.props} />
       </div>
     );
   }
@@ -19,10 +32,6 @@ export class NavigationContainer extends React.Component { // eslint-disable-lin
 
 const mapStateToProps = selectNavigationContainer();
 
-function mapDispatchToProps(dispatch) {
-  return {
-    dispatch,
-  };
-}
+const mapActionCreatorToProps = dispatch => bindActionCreators({ requestTopics }, dispatch);
 
-export default connect(mapStateToProps, mapDispatchToProps)(NavigationContainer);
+export default connect(mapStateToProps, mapActionCreatorToProps)(NavigationContainer);
