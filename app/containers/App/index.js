@@ -22,18 +22,7 @@ import styles from './styles.css';
 function App(props) {
   return (
     <div className={styles.wrapper}>
-      <Helmet
-        titleTemplate="%s - React.js Boilerplate"
-        defaultTitle="React.js Boilerplate"
-        meta={[
-          { name: 'description', content: 'A React.js Boilerplate application' },
-        ]}
-      />
-      <A className={styles.logoWrapper} href="https://twitter.com/mxstbr">
-        <Img className={styles.logo} src={Banner} alt="react-boilerplate - Logo" />
-      </A>
       {React.Children.toArray(props.children)}
-      <Footer />
     </div>
   );
 }
