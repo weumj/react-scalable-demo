@@ -4,18 +4,22 @@
  * This is the first thing users see of our App, at the '/' route
  */
 
-import React from 'react';
+import React, { PropTypes } from 'react';
 import { connect } from 'react-redux';
 import NavigationContainer from '../../containers/NavigationContainer';
 import LinkListContainer from '../../containers/LinkListContainer';
 
 // eslint-disable-next-line react/prefer-stateless-function
 export class HomePage extends React.Component {
+  static propTypes = {
+    children: PropTypes.element,
+  };
+
   render() {
     return (
       <div>
         <NavigationContainer />
-        <LinkListContainer />
+        {this.props.children}
       </div>
     );
   }
