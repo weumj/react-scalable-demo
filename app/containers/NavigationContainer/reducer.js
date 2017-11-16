@@ -23,6 +23,9 @@ function navigationContainerReducer(state = initialState, { type, payload }) {
       return state.set('topics', payload);
     case REQUEST_TOPICS_FAILED:
       return state.set('error', payload);
+    case '@@router/LOCATION_CHANGE':
+      return state.set('routerLocation', payload.pathname);
+
     case SELECT_TOPIC:
       return state.set('selectedTopic', payload).set('isDrawerOpen', false);
     case TOGGLE_DRAWER:
