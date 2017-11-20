@@ -37,7 +37,8 @@
 .linkAnchor {
   text-decoration: none;
   color: inherit;
-  &:hover {
-    text-decoration: underline;
-  }
+}
+
+.linkAnchor:hover {
+   text-decoration: underline;
 }
