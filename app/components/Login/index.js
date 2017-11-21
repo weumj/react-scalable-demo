@@ -8,7 +8,7 @@ import React, { PropTypes } from 'react';
 
 import styles from './styles.css';
 import validator from 'email-validator';
-import classNames from 'classnames';
+import TextInput from '../TextInput';
 
 class Login extends React.Component { // eslint-disable-line react/prefer-stateless-function
   static propTypes = {
@@ -19,7 +19,7 @@ class Login extends React.Component { // eslint-disable-line react/prefer-statel
   state = {};
 
   login = () => {
-    const email = this.emailField.value;
+    const email = this.emailField.value();
 
     if (!validator.validate(email)) {
       this.setState(() => ({
@@ -35,26 +35,17 @@ class Login extends React.Component { // eslint-disable-line react/prefer-statel
   };
 
   render() {
-    const fieldError = !this.state.errorText ? null :
-      (<div
-        className={styles.errorMessage}
-      >
-        {this.state.errorText}
-      </div>);
-
     return (
       <div className={styles.login}>
         <div className={styles.heading}>
           Login with your email
         </div>
-        <input
-          className={classNames(styles.input, { [styles.inputError]: this.state.errorText })}
-          placeholder="Your email"
+        <TextInput
           ref={f => { this.emailField = f; }}
-          type="text"
+          placeholder="Your email"
+          className={styles.input}
+          errorText={this.state.errorText}
         />
-
-        {fieldError}
 
         <div
           className={styles.actionContainer}
