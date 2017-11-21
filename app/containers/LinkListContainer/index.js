@@ -11,7 +11,7 @@ import { connect } from 'react-redux';
 import selectLinkListContainer from './selectors';
 import LinkList from '../../components/LinkList';
 
-import { requestLinks } from './actions';
+import { requestLinks, startAdd } from './actions';
 
 export class LinkListContainer extends React.Component { // eslint-disable-line react/prefer-stateless-function
   static propTypes = {
@@ -38,6 +38,6 @@ export class LinkListContainer extends React.Component { // eslint-disable-line 
 
 const mapStateToProps = selectLinkListContainer();
 
-const mapActionCreatorToProps = dispatch => bindActionCreators({ requestLinks }, dispatch);
+const mapActionCreatorToProps = dispatch => bindActionCreators({ requestLinks, startAdd }, dispatch);
 
 export default connect(mapStateToProps, mapActionCreatorToProps)(LinkListContainer);

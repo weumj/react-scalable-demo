@@ -12,7 +12,45 @@ import TextInput from '../TextInput';
 
 
 class LinkForm extends React.Component { // eslint-disable-line react/prefer-stateless-function
-  state = {};
+  static propTypes = {
+    addLink: PropTypes.func.isRequired,
+    topicName: PropTypes.string.isRequired,
+    addLinkCancel: PropTypes.func.isRequired,
+  };
+  state = {
+    urlError: '',
+    descriptionError: '',
+  };
+
+  onAdd = () => {
+    const url = this.url.value();
+    const description = this.description.value();
+
+    const urlError = url.match(/[-a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,6}\b([/[-a-zA-Z0-9@:%_\+.~#?&//=]*)/) ?
+      null : 'Please provice a valid URL';
+    const descriptionError = description ?
+      null : 'Please provice a valid description';
+
+    this.setState(prev => ({
+      ...prev,
+      urlError,
+      descriptionError,
+    }));
+
+    if (urlError || descriptionError) {
+      return;
+    }
+
+    this.props.addLink({
+      url,
+      description,
+      topicName: this.props.topicName,
+    });
+  };
+
+  onCancel = () => {
+
+  };
 
   render() {
     return (
@@ -25,10 +63,14 @@ class LinkForm extends React.Component { // eslint-disable-line react/prefer-sta
           <TextInput
             placeholder="URL"
             className={styles.input}
+            errorText={this.state.urlError}
+            ref={f => (this.url = f)}
           />
           <TextInput
             placeholder="Description"
             className={styles.input}
+            errorText={this.state.descriptionError}
+            ref={f => (this.description = f)}
           />
 
           <div
@@ -36,13 +78,13 @@ class LinkForm extends React.Component { // eslint-disable-line react/prefer-sta
           >
             <div
               className={styles.button}
-              onClick={this.props.cancelLogin}
+              onClick={this.props.addLinkCancel}
             >
               cancel
             </div>
             <div
               className={styles.button}
-              onClick={this.login}
+              onClick={this.onAdd}
             >
               log in
             </div>
